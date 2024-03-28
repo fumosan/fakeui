@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IoT Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+</head>
+ <!-- 添加顯示日期和時間段落 -->
+    <div id="date-time">
+        <p>現在日期/時間: <span id="current-datetime"></span></p>
+    </div>
+    <div id="dashboard">
+	<!-- 添加血壓和心率顯示 -->
+    	<div class="device" id="blood-pressure-monitor">
+	<h2><i class="fas fa-heartbeat"></i> 血壓計</h2>
+        	<p>高壓: <span class="high-pressure">--</span> mmHg</p>
+        	<p>低壓: <span class="low-pressure">--</span> mmHg</p>
+        	<p>心率: <span class="heart-rate">--</span> 次/分</p>
+    		<button id="pair-bp-button">配對血壓計</button>
+    		<p>Status: <span id="bp-status">unpairing</span></p>
+	</div>
+    <!-- 模态窗口 -->
+    <div id="deviceModal" class="modal">
+         <!-- 模态内容 -->
+        <div class="modal-content">
+           <span class="close">&times;</span>
+           <p>请选择一个设备进行配对。</p>
+           <!-- 这里添加设备列表 -->
+    	</div>
+    </div>
+
+
+	<!-- 電燈 -->
+	<div class="device" id="device1">
+    <h2><i class="fas fa-lightbulb"></i> 電燈</h2>    
+    <p>Status: <span class="status">Off</span></p>
+    <!-- Add switch here -->
+    <label class="switch">
+        <input type="checkbox" class="widget_switch_checkbox" id="light-switch">
+        <span class="widget_switch_label"></span> <!-- Changed from <label> to <span> -->
+    </label>
+    </div>
+
+	<!-- PH Lamp -->
+	<div class="device" id="ph-lamp">
+        <h2><i class="fas fa-lightbulb"></i> PH電燈</h2>
+        <p>Status: <span class="ph-status">Off</span></p>
+        <!-- Add switch here -->
+        <label class="switch">
+            <input type="checkbox" class="widget_switch_checkbox" id="ph-lamp-switch">
+            <span class="widget_switch_label"></span> <!-- Changed from <label> to <span> -->
+        </label>
+    </div>
+
+        <div class="device" id="device2">
+	<h2><i class="fas fa-thermometer-half"></i> 溫度計</h2>        
+            <p>Temperature: <span class="temperature">--</span> °C</p>
+        </div>
+        <!-- 添加更多iot -->
+    </div>
+    <script src="script.js"></script>
+<!-- 在现有HTML中添加 -->
+
+<!-- 加一個對話視窗 -->
+<h1>控制聊天室</h1>
+<div id="messages"></div>
+<input type="text" id="input" autocomplete="off" placeholder="輸入訊息">
+<button onclick="sendMessage()">發送</button>
+
+
+<!-- WebSocket Client UI 开始 -->
+<div class="websocket-section">
+    <h2>WebSocket Client</h2>
+    <div class="websocket-controls">
+        <input type="text" id="ws-url" placeholder="ws://localhost:9002">
+        <button id="ws-connect-btn">Connect</button>
+        <button id="ws-disconnect-btn">Disconnect</button>
+    </div>
+    <div class="websocket-messages">
+        <textarea id="ws-message" placeholder="Enter message to send"></textarea>
+        <button id="ws-send-btn">Send Message</button>
+        <button id="ws-clear-log-btn">Clear Log</button> <!-- Clear Log Button -->
+    </div>
+    <div id="ws-messages-log" class="websocket-log"></div>
+</div>
+<!-- WebSocket Client UI 结束 -->
+
+
+</body>
+</html>
+<script type="text/javascript">
+    var devToolsOpen = false;
+    var element = new Image();
+    Object.defineProperty(element, 'id', {
+        get: function() {
+            devToolsOpen = true; // 當開發者工具嘗試獲取此元素的id屬性時，設置devToolsOpen為true
+            alert("發現您正在觀看DevTool，此網頁為開發demo測試，寫法拙劣請勿參考"); // 彈出消息
+        }
+    });
+
+    setInterval(function() {
+        devToolsOpen = false;
+        console.log(element); // 每隔一段時間嘗試打印element，以觸發getter
+        console.clear(); // 清除控制台，防止方法被發現
+    }, 1000);
+</script>
+
+<script src="script.js"></script>
+<link rel="stylesheet" href="style.css">
+
+
+
